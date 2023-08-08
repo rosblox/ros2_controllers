@@ -262,8 +262,8 @@ controller_interface::return_type DiffDriveController::update(
   // Set wheels velocities:
   for (size_t index = 0; index < static_cast<size_t>(params_.wheels_per_side); ++index)
   {
-    registered_left_wheel_handles_[index].velocity.get().set_value(velocity_left);
-    registered_right_wheel_handles_[index].velocity.get().set_value(velocity_right);
+    registered_left_wheel_handles_[index].velocity.get().set_value(velocity_left * registered_left_wheel_handles_[index].direction);
+    registered_right_wheel_handles_[index].velocity.get().set_value(velocity_right * registered_right_wheel_handles_[index].direction);
   }
 
   return controller_interface::return_type::OK;
@@ -476,7 +476,7 @@ controller_interface::CallbackReturn DiffDriveController::on_activate(
   const auto left_result =
     configure_side("left", params_.left_wheel_names, params_.left_wheel_directions, registered_left_wheel_handles_);
   const auto right_result =
-    configure_side("right", params_.right_wheel_names, params_.left_wheel_directions, registered_right_wheel_handles_);
+    configure_side("right", params_.right_wheel_names, params_.right_wheel_directions, registered_right_wheel_handles_);
 
   if (
     left_result == controller_interface::CallbackReturn::ERROR ||
