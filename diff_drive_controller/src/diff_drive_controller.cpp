@@ -289,10 +289,34 @@ controller_interface::CallbackReturn DiffDriveController::on_configure(
     return controller_interface::CallbackReturn::ERROR;
   }
 
+  if (!params_.left_wheel_directions.empty() && params_.left_wheel_names.size() != params_.left_wheel_directions.size())
+  {
+    RCLCPP_ERROR(
+      logger, "The number of left wheels [%zu] and their specified directions [%zu] are different",
+      params_.left_wheel_names.size(), params_.left_wheel_directions.size());
+    return controller_interface::CallbackReturn::ERROR;
+  }
+
+  if (!params_.right_wheel_directions.empty() && params_.right_wheel_names.size() != params_.right_wheel_directions.size())
+  {
+    RCLCPP_ERROR(
+      logger, "The number of right wheels [%zu] and their specified directions [%zu] are different",
+      params_.right_wheel_names.size(), params_.right_wheel_directions.size());
+    return controller_interface::CallbackReturn::ERROR;
+  }
+
   if (params_.left_wheel_names.empty())
   {
     RCLCPP_ERROR(logger, "Wheel names parameters are empty!");
     return controller_interface::CallbackReturn::ERROR;
+  }
+
+  if(params_.left_wheel_directions.empty()){
+    params_.left_wheel_directions = std::vector<long int>(params_.left_wheel_names.size(), 1);
+  }
+
+  if(params_.right_wheel_directions.empty()){
+    params_.right_wheel_directions = std::vector<long int>(params_.right_wheel_names.size(), 1);
   }
 
   const double wheel_separation = params_.wheel_separation_multiplier * params_.wheel_separation;
@@ -450,9 +474,9 @@ controller_interface::CallbackReturn DiffDriveController::on_activate(
   const rclcpp_lifecycle::State &)
 {
   const auto left_result =
-    configure_side("left", params_.left_wheel_names, registered_left_wheel_handles_);
+    configure_side("left", params_.left_wheel_names, params_.left_wheel_directions, registered_left_wheel_handles_);
   const auto right_result =
-    configure_side("right", params_.right_wheel_names, registered_right_wheel_handles_);
+    configure_side("right", params_.right_wheel_names, params_.left_wheel_directions, registered_right_wheel_handles_);
 
   if (
     left_result == controller_interface::CallbackReturn::ERROR ||
@@ -552,7 +576,8 @@ void DiffDriveController::halt()
 }
 
 controller_interface::CallbackReturn DiffDriveController::configure_side(
-  const std::string & side, const std::vector<std::string> & wheel_names,
+  const std::string & side, const std::vector<std::string> & wheel_names, 
+  const std::vector<long int> & wheel_directions,
   std::vector<WheelHandle> & registered_handles)
 {
   auto logger = get_node()->get_logger();
@@ -565,8 +590,10 @@ controller_interface::CallbackReturn DiffDriveController::configure_side(
 
   // register handles
   registered_handles.reserve(wheel_names.size());
-  for (const auto & wheel_name : wheel_names)
-  {
+  for (const auto & wheel_name : wheel_names) {
+    auto index = std::distance(wheel_names.begin(), std::find(wheel_names.begin(), wheel_names.end(), wheel_name));
+    int wheel_direction = wheel_directions[index];
+
     const auto interface_name = feedback_type();
     const auto state_handle = std::find_if(
       state_interfaces_.cbegin(), state_interfaces_.cend(),
@@ -597,7 +624,7 @@ controller_interface::CallbackReturn DiffDriveController::configure_side(
     }
 
     registered_handles.emplace_back(
-      WheelHandle{std::ref(*state_handle), std::ref(*command_handle)});
+      WheelHandle{std::ref(*state_handle), std::ref(*command_handle), wheel_direction});
   }
 
   return controller_interface::CallbackReturn::SUCCESS;

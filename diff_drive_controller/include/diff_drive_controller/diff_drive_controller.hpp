@@ -96,11 +96,13 @@ protected:
   {
     std::reference_wrapper<const hardware_interface::LoanedStateInterface> feedback;
     std::reference_wrapper<hardware_interface::LoanedCommandInterface> velocity;
+    int direction;
   };
 
   const char * feedback_type() const;
   controller_interface::CallbackReturn configure_side(
     const std::string & side, const std::vector<std::string> & wheel_names,
+    const std::vector<long int> & wheel_directions,
     std::vector<WheelHandle> & registered_handles);
 
   std::vector<WheelHandle> registered_left_wheel_handles_;

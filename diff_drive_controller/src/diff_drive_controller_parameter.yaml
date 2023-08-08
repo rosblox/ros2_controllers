@@ -9,6 +9,16 @@ diff_drive_controller:
     default_value: [],
     description: "Link names of the right side wheels",
   }
+  left_wheel_directions: {
+    type: int_array,
+    default_value: [],
+    description: "Turning directions of left side wheels",
+  }
+  right_wheel_directions: {
+    type: int_array,
+    default_value: [],
+    description: "Turning directions of right side wheels",
+  }
   wheel_separation: {
     type: double,
     default_value: 0.0,
