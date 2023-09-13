@@ -28,15 +28,6 @@
 #include "rclcpp/logging.hpp"
 #include "tf2/LinearMath/Quaternion.h"
 
-namespace
-{
-constexpr auto DEFAULT_COMMAND_TOPIC = "~/cmd_vel";
-constexpr auto DEFAULT_COMMAND_UNSTAMPED_TOPIC = "~/cmd_vel_unstamped";
-constexpr auto DEFAULT_COMMAND_OUT_TOPIC = "~/cmd_vel_out";
-constexpr auto DEFAULT_ODOMETRY_TOPIC = "~/odom";
-constexpr auto DEFAULT_TRANSFORM_TOPIC = "/tf";
-}  // namespace
-
 namespace diff_drive_controller
 {
 using namespace std::chrono_literals;
@@ -353,7 +344,7 @@ controller_interface::CallbackReturn DiffDriveController::on_configure(
   if (publish_limited_velocity_)
   {
     limited_velocity_publisher_ =
-      get_node()->create_publisher<Twist>(DEFAULT_COMMAND_OUT_TOPIC, rclcpp::SystemDefaultsQoS());
+      get_node()->create_publisher<Twist>(params_.command_out_topic, rclcpp::SystemDefaultsQoS());
     realtime_limited_velocity_publisher_ =
       std::make_shared<realtime_tools::RealtimePublisher<Twist>>(limited_velocity_publisher_);
   }
@@ -369,7 +360,7 @@ controller_interface::CallbackReturn DiffDriveController::on_configure(
   if (use_stamped_vel_)
   {
     velocity_command_subscriber_ = get_node()->create_subscription<Twist>(
-      DEFAULT_COMMAND_TOPIC, rclcpp::SystemDefaultsQoS(),
+      params_.command_topic, rclcpp::SystemDefaultsQoS(),
       [this](const std::shared_ptr<Twist> msg) -> void
       {
         if (!subscriber_is_active_)
@@ -393,7 +384,7 @@ controller_interface::CallbackReturn DiffDriveController::on_configure(
   {
     velocity_command_unstamped_subscriber_ =
       get_node()->create_subscription<geometry_msgs::msg::Twist>(
-        DEFAULT_COMMAND_UNSTAMPED_TOPIC, rclcpp::SystemDefaultsQoS(),
+        params_.command_unstamped_topic, rclcpp::SystemDefaultsQoS(),
         [this](const std::shared_ptr<geometry_msgs::msg::Twist> msg) -> void
         {
           if (!subscriber_is_active_)
@@ -413,7 +404,7 @@ controller_interface::CallbackReturn DiffDriveController::on_configure(
 
   // initialize odometry publisher and messasge
   odometry_publisher_ = get_node()->create_publisher<nav_msgs::msg::Odometry>(
-    DEFAULT_ODOMETRY_TOPIC, rclcpp::SystemDefaultsQoS());
+    params_.odometry_topic, rclcpp::SystemDefaultsQoS());
   realtime_odometry_publisher_ =
     std::make_shared<realtime_tools::RealtimePublisher<nav_msgs::msg::Odometry>>(
       odometry_publisher_);
@@ -455,7 +446,7 @@ controller_interface::CallbackReturn DiffDriveController::on_configure(
 
   // initialize transform publisher and message
   odometry_transform_publisher_ = get_node()->create_publisher<tf2_msgs::msg::TFMessage>(
-    DEFAULT_TRANSFORM_TOPIC, rclcpp::SystemDefaultsQoS());
+    params_.transform_topic, rclcpp::SystemDefaultsQoS());
   realtime_odometry_transform_publisher_ =
     std::make_shared<realtime_tools::RealtimePublisher<tf2_msgs::msg::TFMessage>>(
       odometry_transform_publisher_);

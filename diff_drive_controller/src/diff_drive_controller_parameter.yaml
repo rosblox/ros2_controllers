@@ -1,4 +1,29 @@
 diff_drive_controller:
+  command_topic: {
+    type: string,
+    default_value: "~/cmd_vel",
+    description: "Topic for sending velocity commands to the controller.",
+  }
+  command_unstamped_topic: {
+    type: string,
+    default_value: "~/cmd_vel_unstamped",
+    description: "Topic for sending (unstamped) velocity commands to the controller.",
+  }
+  command_out_topic: {
+    type: string,
+    default_value: "~/cmd_vel_out",
+    description: "Topic outputting velocity commands of the controller.",
+  }
+  odometry_topic: {
+    type: string,
+    default_value: "~/odom",
+    description: "Topic publishing odometry messages.",
+  }
+  transform_topic: {
+    type: string,
+    default_value: "/tf",
+    description: "Topic publishing TF messages.",
+  }
   left_wheel_names: {
     type: string_array,
     default_value: [],
