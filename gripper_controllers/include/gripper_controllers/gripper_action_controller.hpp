@@ -37,7 +37,7 @@
 #include "gripper_controllers/visibility_control.hpp"
 #include "hardware_interface/loaned_command_interface.hpp"
 #include "hardware_interface/loaned_state_interface.hpp"
-#include "realtime_tools/realtime_buffer.h"
+#include "realtime_tools/realtime_buffer.hpp"
 #include "realtime_tools/realtime_server_goal_handle.h"
 
 // Project

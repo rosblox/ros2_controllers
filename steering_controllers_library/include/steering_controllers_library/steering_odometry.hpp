@@ -21,7 +21,7 @@
 #include <tuple>
 #include <vector>
 
-#include "realtime_tools/realtime_buffer.h"
+#include "realtime_tools/realtime_buffer.hpp"
 #include "realtime_tools/realtime_publisher.hpp"
 
 #include "rcppmath/rolling_mean_accumulator.hpp"
