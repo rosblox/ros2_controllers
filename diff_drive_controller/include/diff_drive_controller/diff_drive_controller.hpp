@@ -42,7 +42,7 @@
 #include "realtime_tools/realtime_publisher.h"
 #include "tf2_msgs/msg/tf_message.hpp"
 
-#include "diff_drive_controller_parameters.hpp"
+#include <diff_drive_controller/diff_drive_controller_parameters.hpp>
 
 namespace diff_drive_controller
 {
