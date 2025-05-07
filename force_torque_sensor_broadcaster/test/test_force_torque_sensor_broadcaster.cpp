@@ -32,6 +32,8 @@
 #include "rclcpp_lifecycle/node_interfaces/lifecycle_node_interface.hpp"
 
 using hardware_interface::LoanedStateInterface;
+using testing::IsEmpty;
+using testing::SizeIs;
 
 namespace
 {
@@ -71,31 +73,40 @@ void ForceTorqueSensorBroadcasterTest::subscribe_and_get_message(
   geometry_msgs::msg::WrenchStamped & wrench_msg)
 {
   // create a new subscriber
+  geometry_msgs::msg::WrenchStamped::SharedPtr received_msg;
   rclcpp::Node test_subscription_node("test_subscription_node");
-  auto subs_callback = [&](const geometry_msgs::msg::WrenchStamped::SharedPtr) {};
+  auto subs_callback = [&](const geometry_msgs::msg::WrenchStamped::SharedPtr msg)
+  { received_msg = msg; };
   auto subscription = test_subscription_node.create_subscription<geometry_msgs::msg::WrenchStamped>(
     "/test_force_torque_sensor_broadcaster/wrench", 10, subs_callback);
+  rclcpp::executors::SingleThreadedExecutor executor;
+  executor.add_node(test_subscription_node.get_node_base_interface());
 
   // call update to publish the test value
   // since update doesn't guarantee a published message, republish until received
   int max_sub_check_loop_count = 5;  // max number of tries for pub/sub loop
-  rclcpp::WaitSet wait_set;          // block used to wait on message
-  wait_set.add_subscription(subscription);
   while (max_sub_check_loop_count--)
   {
     fts_broadcaster_->update(rclcpp::Time(0), rclcpp::Duration::from_seconds(0.01));
+    const auto timeout = std::chrono::milliseconds{1};
+    const auto until = test_subscription_node.get_clock()->now() + timeout;
+    while (!received_msg && test_subscription_node.get_clock()->now() < until)
+    {
+      executor.spin_some();
+      std::this_thread::sleep_for(std::chrono::microseconds(10));
+    }
     // check if message has been received
-    if (wait_set.wait(std::chrono::milliseconds(2)).kind() == rclcpp::WaitResultKind::Ready)
+    if (received_msg.get())
     {
       break;
     }
   }
   ASSERT_GE(max_sub_check_loop_count, 0) << "Test was unable to publish a message through "
                                             "controller/broadcaster update loop";
+  ASSERT_TRUE(received_msg);
 
   // take message from subscription
-  rclcpp::MessageInfo msg_info;
-  ASSERT_TRUE(subscription->take(wrench_msg, msg_info));
+  wrench_msg = *received_msg;
 }
 
 TEST_F(ForceTorqueSensorBroadcasterTest, SensorName_InterfaceNames_NotSet)
@@ -156,6 +167,14 @@ TEST_F(ForceTorqueSensorBroadcasterTest, SensorName_Configure_Success)
 
   // configure passed
   ASSERT_EQ(fts_broadcaster_->on_configure(rclcpp_lifecycle::State()), NODE_SUCCESS);
+
+  // check interface configuration
+  auto cmd_if_conf = fts_broadcaster_->command_interface_configuration();
+  ASSERT_THAT(cmd_if_conf.names, IsEmpty());
+  ASSERT_EQ(cmd_if_conf.type, controller_interface::interface_configuration_type::NONE);
+  auto state_if_conf = fts_broadcaster_->state_interface_configuration();
+  ASSERT_THAT(state_if_conf.names, SizeIs(6lu));
+  ASSERT_EQ(state_if_conf.type, controller_interface::interface_configuration_type::INDIVIDUAL);
 }
 
 TEST_F(ForceTorqueSensorBroadcasterTest, InterfaceNames_Configure_Success)
@@ -173,7 +192,7 @@ TEST_F(ForceTorqueSensorBroadcasterTest, InterfaceNames_Configure_Success)
   ASSERT_EQ(fts_broadcaster_->on_configure(rclcpp_lifecycle::State()), NODE_SUCCESS);
 }
 
-TEST_F(ForceTorqueSensorBroadcasterTest, SensorName_Activate_Success)
+TEST_F(ForceTorqueSensorBroadcasterTest, SensorName_ActivateDeactivate_Success)
 {
   SetUpFTSBroadcaster();
 
@@ -184,6 +203,25 @@ TEST_F(ForceTorqueSensorBroadcasterTest, SensorName_Activate_Success)
   // configure and activate success
   ASSERT_EQ(fts_broadcaster_->on_configure(rclcpp_lifecycle::State()), NODE_SUCCESS);
   ASSERT_EQ(fts_broadcaster_->on_activate(rclcpp_lifecycle::State()), NODE_SUCCESS);
+
+  // check interface configuration
+  auto cmd_if_conf = fts_broadcaster_->command_interface_configuration();
+  ASSERT_THAT(cmd_if_conf.names, IsEmpty());
+  ASSERT_EQ(cmd_if_conf.type, controller_interface::interface_configuration_type::NONE);
+  auto state_if_conf = fts_broadcaster_->state_interface_configuration();
+  ASSERT_THAT(state_if_conf.names, SizeIs(6lu));
+  ASSERT_EQ(state_if_conf.type, controller_interface::interface_configuration_type::INDIVIDUAL);
+
+  // deactivate passed
+  ASSERT_EQ(fts_broadcaster_->on_deactivate(rclcpp_lifecycle::State()), NODE_SUCCESS);
+
+  // check interface configuration
+  cmd_if_conf = fts_broadcaster_->command_interface_configuration();
+  ASSERT_THAT(cmd_if_conf.names, IsEmpty());
+  ASSERT_EQ(cmd_if_conf.type, controller_interface::interface_configuration_type::NONE);
+  state_if_conf = fts_broadcaster_->state_interface_configuration();
+  ASSERT_THAT(state_if_conf.names, SizeIs(6lu));  // did not change
+  ASSERT_EQ(state_if_conf.type, controller_interface::interface_configuration_type::INDIVIDUAL);
 }
 
 TEST_F(ForceTorqueSensorBroadcasterTest, SensorName_Update_Success)

@@ -2,6 +2,113 @@
 Changelog for package force_torque_sensor_broadcaster
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.45.0 (2025-04-27)
+-------------------
+
+2.44.0 (2025-04-10)
+-------------------
+
+2.43.0 (2025-03-17)
+-------------------
+
+2.42.1 (2025-02-24)
+-------------------
+
+2.42.0 (2025-02-17)
+-------------------
+* Update paths of GPL includes (backport `#1487 <https://github.com/ros-controls/ros2_controllers/issues/1487>`_) (`#1493 <https://github.com/ros-controls/ros2_controllers/issues/1493>`_)
+* Contributors: Christoph Fröhlich
+
+2.41.0 (2025-01-13)
+-------------------
+
+2.40.0 (2025-01-01)
+-------------------
+* Use the .hpp headers from `realtime_tools` package (backport `#1406 <https://github.com/ros-controls/ros2_controllers/issues/1406>`_) (`#1427 <https://github.com/ros-controls/ros2_controllers/issues/1427>`_)
+* Contributors: mergify[bot]
+
+2.39.0 (2024-12-03)
+-------------------
+* Update maintainers and add url tags (`#1363 <https://github.com/ros-controls/ros2_controllers/issues/1363>`_) (`#1364 <https://github.com/ros-controls/ros2_controllers/issues/1364>`_)
+* Contributors: mergify[bot]
+
+2.38.0 (2024-11-09)
+-------------------
+* Added -Wconversion flag and fix warnings (`#667 <https://github.com/ros-controls/ros2_controllers/issues/667>`_) (`#1321 <https://github.com/ros-controls/ros2_controllers/issues/1321>`_)
+* Contributors: mergify[bot]
+
+2.37.3 (2024-09-11)
+-------------------
+
+2.37.2 (2024-08-22)
+-------------------
+
+2.37.1 (2024-08-14)
+-------------------
+
+2.37.0 (2024-07-24)
+-------------------
+* Fix WaitSet issue in tests  (backport `#1206 <https://github.com/ros-controls/ros2_controllers/issues/1206>`_) (`#1211 <https://github.com/ros-controls/ros2_controllers/issues/1211>`_)
+* Contributors: mergify[bot]
+
+2.36.0 (2024-07-09)
+-------------------
+
+2.35.0 (2024-05-22)
+-------------------
+
+2.34.0 (2024-04-01)
+-------------------
+* Let sphinx add parameter description with nested structures to documentation (backport `#652 <https://github.com/ros-controls/ros2_controllers/issues/652>`_) (`#1005 <https://github.com/ros-controls/ros2_controllers/issues/1005>`_)
+* Contributors: mergify[bot]
+
+2.33.0 (2024-02-12)
+-------------------
+* Add test_depend on `hardware_interface_testing` (backport `#1018 <https://github.com/ros-controls/ros2_controllers/issues/1018>`_) (`#1019 <https://github.com/ros-controls/ros2_controllers/issues/1019>`_)
+* Add tests for `interface_configuration_type` consistently (`#899 <https://github.com/ros-controls/ros2_controllers/issues/899>`_) (`#1011 <https://github.com/ros-controls/ros2_controllers/issues/1011>`_)
+* Revert "[ForceTorqueSensorBroadcaster] Create ParamListener and get parameters on configure (`#698 <https://github.com/ros-controls/ros2_controllers/issues/698>`_)" (`#988 <https://github.com/ros-controls/ros2_controllers/issues/988>`_) (`#1003 <https://github.com/ros-controls/ros2_controllers/issues/1003>`_)
+* Contributors: mergify[bot]
+
+2.32.0 (2024-01-20)
+-------------------
+* Increase test coverage of interface configuration getters (`#856 <https://github.com/ros-controls/ros2_controllers/issues/856>`_) (`#865 <https://github.com/ros-controls/ros2_controllers/issues/865>`_)
+* Contributors: mergify[bot]
+
+2.31.0 (2024-01-11)
+-------------------
+
+2.30.0 (2023-12-20)
+-------------------
+
+2.29.0 (2023-12-05)
+-------------------
+* [ForceTorqueSensorBroadcaster] Create ParamListener and get parameters on configure (backport `#698 <https://github.com/ros-controls/ros2_controllers/issues/698>`_) (`#750 <https://github.com/ros-controls/ros2_controllers/issues/750>`_)
+  * [ForceTorqueSensorBroadcaster] Create ParamListener and get parameters on configure (`#698 <https://github.com/ros-controls/ros2_controllers/issues/698>`_)
+  * Create ParamListener and get parameters on configure
+  * Declare parameters for test_force_torque_sensor_broadcaster
+  Since the parameters are not declared on init anymore, they cannot be
+  set without declaring them before
+  ---------
+  Co-authored-by: Bence Magyar <bence.magyar.robotics@gmail.com>
+  (cherry picked from commit 32aaef7552638826aba0b3f3a72b1c1453739afa)
+  * Fix "parameter is already declared" error
+  ---------
+  Co-authored-by: Noel Jiménez García <noel.jimenez@pal-robotics.com>
+  Co-authored-by: Christoph Froehlich <christoph.froehlich@ait.ac.at>
+* Contributors: mergify[bot]
+
+2.28.0 (2023-11-30)
+-------------------
+
+2.27.0 (2023-11-14)
+-------------------
+
+2.26.0 (2023-10-03)
+-------------------
+
+2.25.0 (2023-09-15)
+-------------------
+
 2.24.0 (2023-08-07)
 -------------------
 

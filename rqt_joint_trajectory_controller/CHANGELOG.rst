@@ -2,6 +2,97 @@
 Changelog for package rqt_joint_trajectory_controller
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.45.0 (2025-04-27)
+-------------------
+
+2.44.0 (2025-04-10)
+-------------------
+* Bump version of pre-commit hooks (backport `#1618 <https://github.com/ros-controls/ros2_controllers/issues/1618>`_) (`#1620 <https://github.com/ros-controls/ros2_controllers/issues/1620>`_)
+* Contributors: mergify[bot]
+
+2.43.0 (2025-03-17)
+-------------------
+* Update documentation of rqt_joint_trajectory_controller (backport `#1578 <https://github.com/ros-controls/ros2_controllers/issues/1578>`_) (`#1582 <https://github.com/ros-controls/ros2_controllers/issues/1582>`_)
+* Contributors: Aditya Pawar
+
+2.42.1 (2025-02-24)
+-------------------
+
+2.42.0 (2025-02-17)
+-------------------
+
+2.41.0 (2025-01-13)
+-------------------
+
+2.40.0 (2025-01-01)
+-------------------
+
+2.39.0 (2024-12-03)
+-------------------
+* Update maintainers and add url tags (`#1363 <https://github.com/ros-controls/ros2_controllers/issues/1363>`_) (`#1364 <https://github.com/ros-controls/ros2_controllers/issues/1364>`_)
+* Contributors: mergify[bot]
+
+2.38.0 (2024-11-09)
+-------------------
+
+2.37.3 (2024-09-11)
+-------------------
+* Fix bug for displaying all controllers (`#1259 <https://github.com/ros-controls/ros2_controllers/issues/1259>`_) (`#1271 <https://github.com/ros-controls/ros2_controllers/issues/1271>`_)
+* [RQT-JTC] limits from jtc controlled joints (`#1146 <https://github.com/ros-controls/ros2_controllers/issues/1146>`_) (`#1274 <https://github.com/ros-controls/ros2_controllers/issues/1274>`_)
+* Contributors: mergify[bot]
+
+2.37.2 (2024-08-22)
+-------------------
+
+2.37.1 (2024-08-14)
+-------------------
+
+2.37.0 (2024-07-24)
+-------------------
+
+2.36.0 (2024-07-09)
+-------------------
+
+2.35.0 (2024-05-22)
+-------------------
+
+2.34.0 (2024-04-01)
+-------------------
+* [CI] Code coverage + pre-commit (backport `#1057 <https://github.com/ros-controls/ros2_controllers/issues/1057>`_) (`#1064 <https://github.com/ros-controls/ros2_controllers/issues/1064>`_)
+* Contributors: mergify[bot]
+
+2.33.0 (2024-02-12)
+-------------------
+
+2.32.0 (2024-01-20)
+-------------------
+
+2.31.0 (2024-01-11)
+-------------------
+* Add rqt_JTC to docs (`#950 <https://github.com/ros-controls/ros2_controllers/issues/950>`_) (`#952 <https://github.com/ros-controls/ros2_controllers/issues/952>`_)
+* Contributors: mergify[bot]
+
+2.30.0 (2023-12-20)
+-------------------
+* Fix rqt jtc bugs for continuous joints and other minor bugs (`#890 <https://github.com/ros-controls/ros2_controllers/issues/890>`_) (`#897 <https://github.com/ros-controls/ros2_controllers/issues/897>`_)
+* Adapted rqt_jtc to newest control_msgs for jtc (`#643 <https://github.com/ros-controls/ros2_controllers/issues/643>`_) (`#659 <https://github.com/ros-controls/ros2_controllers/issues/659>`_)
+* Contributors: Guillaume Walck, Sai Kishor Kothakota
+
+2.29.0 (2023-12-05)
+-------------------
+
+2.28.0 (2023-11-30)
+-------------------
+
+2.27.0 (2023-11-14)
+-------------------
+
+2.26.0 (2023-10-03)
+-------------------
+
+2.25.0 (2023-09-15)
+-------------------
+
 2.24.0 (2023-08-07)
 -------------------
 

@@ -32,6 +32,8 @@
 #include "sensor_msgs/msg/imu.hpp"
 
 using hardware_interface::LoanedStateInterface;
+using testing::IsEmpty;
+using testing::SizeIs;
 
 namespace
 {
@@ -75,31 +77,39 @@ void IMUSensorBroadcasterTest::SetUpIMUBroadcaster()
 void IMUSensorBroadcasterTest::subscribe_and_get_message(sensor_msgs::msg::Imu & imu_msg)
 {
   // create a new subscriber
+  sensor_msgs::msg::Imu::SharedPtr received_msg;
   rclcpp::Node test_subscription_node("test_subscription_node");
-  auto subs_callback = [&](const sensor_msgs::msg::Imu::SharedPtr) {};
+  auto subs_callback = [&](const sensor_msgs::msg::Imu::SharedPtr msg) { received_msg = msg; };
   auto subscription = test_subscription_node.create_subscription<sensor_msgs::msg::Imu>(
     "/test_imu_sensor_broadcaster/imu", 10, subs_callback);
+  rclcpp::executors::SingleThreadedExecutor executor;
+  executor.add_node(test_subscription_node.get_node_base_interface());
 
   // call update to publish the test value
   // since update doesn't guarantee a published message, republish until received
   int max_sub_check_loop_count = 5;  // max number of tries for pub/sub loop
-  rclcpp::WaitSet wait_set;          // block used to wait on message
-  wait_set.add_subscription(subscription);
   while (max_sub_check_loop_count--)
   {
     imu_broadcaster_->update(rclcpp::Time(0), rclcpp::Duration::from_seconds(0.01));
+    const auto timeout = std::chrono::milliseconds{1};
+    const auto until = test_subscription_node.get_clock()->now() + timeout;
+    while (!received_msg && test_subscription_node.get_clock()->now() < until)
+    {
+      executor.spin_some();
+      std::this_thread::sleep_for(std::chrono::microseconds(10));
+    }
     // check if message has been received
-    if (wait_set.wait(std::chrono::milliseconds(2)).kind() == rclcpp::WaitResultKind::Ready)
+    if (received_msg.get())
     {
       break;
     }
   }
   ASSERT_GE(max_sub_check_loop_count, 0) << "Test was unable to publish a message through "
                                             "controller/broadcaster update loop";
+  ASSERT_TRUE(received_msg);
 
   // take message from subscription
-  rclcpp::MessageInfo msg_info;
-  ASSERT_TRUE(subscription->take(imu_msg, msg_info));
+  imu_msg = *received_msg;
 }
 
 TEST_F(IMUSensorBroadcasterTest, SensorName_Configure_Success)
@@ -114,6 +124,14 @@ TEST_F(IMUSensorBroadcasterTest, SensorName_Configure_Success)
 
   // configure passed
   ASSERT_EQ(imu_broadcaster_->on_configure(rclcpp_lifecycle::State()), NODE_SUCCESS);
+
+  // check interface configuration
+  auto cmd_if_conf = imu_broadcaster_->command_interface_configuration();
+  ASSERT_THAT(cmd_if_conf.names, IsEmpty());
+  EXPECT_EQ(cmd_if_conf.type, controller_interface::interface_configuration_type::NONE);
+  auto state_if_conf = imu_broadcaster_->state_interface_configuration();
+  ASSERT_THAT(state_if_conf.names, SizeIs(10lu));
+  EXPECT_EQ(state_if_conf.type, controller_interface::interface_configuration_type::INDIVIDUAL);
 }
 
 TEST_F(IMUSensorBroadcasterTest, SensorName_Activate_Success)
@@ -127,6 +145,25 @@ TEST_F(IMUSensorBroadcasterTest, SensorName_Activate_Success)
   // configure and activate success
   ASSERT_EQ(imu_broadcaster_->on_configure(rclcpp_lifecycle::State()), NODE_SUCCESS);
   ASSERT_EQ(imu_broadcaster_->on_activate(rclcpp_lifecycle::State()), NODE_SUCCESS);
+
+  // check interface configuration
+  auto cmd_if_conf = imu_broadcaster_->command_interface_configuration();
+  ASSERT_THAT(cmd_if_conf.names, IsEmpty());
+  EXPECT_EQ(cmd_if_conf.type, controller_interface::interface_configuration_type::NONE);
+  auto state_if_conf = imu_broadcaster_->state_interface_configuration();
+  ASSERT_THAT(state_if_conf.names, SizeIs(10lu));
+  EXPECT_EQ(state_if_conf.type, controller_interface::interface_configuration_type::INDIVIDUAL);
+
+  // deactivate passed
+  ASSERT_EQ(imu_broadcaster_->on_deactivate(rclcpp_lifecycle::State()), NODE_SUCCESS);
+
+  // check interface configuration
+  cmd_if_conf = imu_broadcaster_->command_interface_configuration();
+  ASSERT_THAT(cmd_if_conf.names, IsEmpty());
+  EXPECT_EQ(cmd_if_conf.type, controller_interface::interface_configuration_type::NONE);
+  state_if_conf = imu_broadcaster_->state_interface_configuration();
+  ASSERT_THAT(state_if_conf.names, SizeIs(10lu));  // did not change
+  EXPECT_EQ(state_if_conf.type, controller_interface::interface_configuration_type::INDIVIDUAL);
 }
 
 TEST_F(IMUSensorBroadcasterTest, SensorName_Update_Success)

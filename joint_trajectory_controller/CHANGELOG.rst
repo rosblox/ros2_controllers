@@ -2,6 +2,165 @@
 Changelog for package joint_trajectory_controller
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.45.0 (2025-04-27)
+-------------------
+
+2.44.0 (2025-04-10)
+-------------------
+* Bump version of pre-commit hooks (backport `#1618 <https://github.com/ros-controls/ros2_controllers/issues/1618>`_) (`#1620 <https://github.com/ros-controls/ros2_controllers/issues/1620>`_)
+* Replace RCLCPP\_*_STREAM macros with RCLCPP\_* (backport `#1600 <https://github.com/ros-controls/ros2_controllers/issues/1600>`_) (`#1602 <https://github.com/ros-controls/ros2_controllers/issues/1602>`_)
+* [jtc tests] avoid dangling ref of command / state interfaces (backport `#1596 <https://github.com/ros-controls/ros2_controllers/issues/1596>`_) (`#1597 <https://github.com/ros-controls/ros2_controllers/issues/1597>`_)
+* Contributors: mergify[bot]
+
+2.43.0 (2025-03-17)
+-------------------
+* Use constructor parameters instead of initializer list (backport `#1587 <https://github.com/ros-controls/ros2_controllers/issues/1587>`_) (`#1589 <https://github.com/ros-controls/ros2_controllers/issues/1589>`_)
+* Contributors: Felix Exner (fexner)
+
+2.42.1 (2025-02-24)
+-------------------
+
+2.42.0 (2025-02-17)
+-------------------
+* [JTC]: Abort goal on deactivate (backport `#1517 <https://github.com/ros-controls/ros2_controllers/issues/1517>`_) (`#1521 <https://github.com/ros-controls/ros2_controllers/issues/1521>`_)
+* Update paths of GPL includes (backport `#1487 <https://github.com/ros-controls/ros2_controllers/issues/1487>`_) (`#1493 <https://github.com/ros-controls/ros2_controllers/issues/1493>`_)
+* Contributors: Christoph Fröhlich
+
+2.41.0 (2025-01-13)
+-------------------
+* Remove empty on_shutdown() callbacks (backport `#1477 <https://github.com/ros-controls/ros2_controllers/issues/1477>`_) (`#1482 <https://github.com/ros-controls/ros2_controllers/issues/1482>`_)
+* Contributors: mergify[bot]
+
+2.40.0 (2025-01-01)
+-------------------
+* Increase margin for state_publish_rate  (`#1430 <https://github.com/ros-controls/ros2_controllers/issues/1430>`_)
+* Add an error msg if empty message is received (backport `#1424 <https://github.com/ros-controls/ros2_controllers/issues/1424>`_) (`#1428 <https://github.com/ros-controls/ros2_controllers/issues/1428>`_)
+* Use the .hpp headers from `realtime_tools` package (backport `#1406 <https://github.com/ros-controls/ros2_controllers/issues/1406>`_) (`#1427 <https://github.com/ros-controls/ros2_controllers/issues/1427>`_)
+* [CI] Add clang job and setup concurrency (backport `#1407 <https://github.com/ros-controls/ros2_controllers/issues/1407>`_) (`#1418 <https://github.com/ros-controls/ros2_controllers/issues/1418>`_)
+* Contributors: Christoph Fröhlich, mergify[bot]
+
+2.39.0 (2024-12-03)
+-------------------
+* Update maintainers and add url tags (`#1363 <https://github.com/ros-controls/ros2_controllers/issues/1363>`_) (`#1364 <https://github.com/ros-controls/ros2_controllers/issues/1364>`_)
+* Contributors: mergify[bot]
+
+2.38.0 (2024-11-09)
+-------------------
+* [JTC] Fix the JTC length_error exceptions in the tests (backport `#1360 <https://github.com/ros-controls/ros2_controllers/issues/1360>`_) (`#1361 <https://github.com/ros-controls/ros2_controllers/issues/1361>`_)
+* [jtc] Improve trajectory sampling efficiency (`#1297 <https://github.com/ros-controls/ros2_controllers/issues/1297>`_) (`#1357 <https://github.com/ros-controls/ros2_controllers/issues/1357>`_)
+* fixes for windows compilation (`#1330 <https://github.com/ros-controls/ros2_controllers/issues/1330>`_) (`#1332 <https://github.com/ros-controls/ros2_controllers/issues/1332>`_)
+* [JTC] Add Parameter to Toggle State Setting on Activation (backport `#1231 <https://github.com/ros-controls/ros2_controllers/issues/1231>`_) (`#1320 <https://github.com/ros-controls/ros2_controllers/issues/1320>`_)
+* Added -Wconversion flag and fix warnings (`#667 <https://github.com/ros-controls/ros2_controllers/issues/667>`_) (`#1321 <https://github.com/ros-controls/ros2_controllers/issues/1321>`_)
+* Contributors: mergify[bot]
+
+2.37.3 (2024-09-11)
+-------------------
+
+2.37.2 (2024-08-22)
+-------------------
+
+2.37.1 (2024-08-14)
+-------------------
+* Fix admittance controller interface read/write logic (backport `#1232 <https://github.com/ros-controls/ros2_controllers/issues/1232>`_) (`#1234 <https://github.com/ros-controls/ros2_controllers/issues/1234>`_)
+* Contributors: mergify[bot]
+
+2.37.0 (2024-07-24)
+-------------------
+* Fix WaitSet issue in tests  (backport `#1206 <https://github.com/ros-controls/ros2_controllers/issues/1206>`_) (`#1211 <https://github.com/ros-controls/ros2_controllers/issues/1211>`_)
+* [JTC] Make goal_time_tolerance overwrite default value only if explicitly set (backport `#1192 <https://github.com/ros-controls/ros2_controllers/issues/1192>`_ + `#1209 <https://github.com/ros-controls/ros2_controllers/issues/1209>`_) (`#1208 <https://github.com/ros-controls/ros2_controllers/issues/1208>`_)
+* [JTC] Process tolerances sent with action goal (backport `#716 <https://github.com/ros-controls/ros2_controllers/issues/716>`_) (`#1189 <https://github.com/ros-controls/ros2_controllers/issues/1189>`_)
+* Contributors: mergify[bot]
+
+2.36.0 (2024-07-09)
+-------------------
+* Still fill desired/actual deprecated fields (`#1172 <https://github.com/ros-controls/ros2_controllers/issues/1172>`_)
+* JTC trajectory end time validation fix (`#1090 <https://github.com/ros-controls/ros2_controllers/issues/1090>`_) (`#1140 <https://github.com/ros-controls/ros2_controllers/issues/1140>`_)
+* Contributors: Bence Magyar, mergify[bot]
+
+2.35.0 (2024-05-22)
+-------------------
+* [JTC] Remove unused test code (`#1095 <https://github.com/ros-controls/ros2_controllers/issues/1095>`_) (`#1096 <https://github.com/ros-controls/ros2_controllers/issues/1096>`_)
+* Contributors: mergify[bot]
+
+2.34.0 (2024-04-01)
+-------------------
+* Remove action_msg dependency (`#1077 <https://github.com/ros-controls/ros2_controllers/issues/1077>`_) (`#1080 <https://github.com/ros-controls/ros2_controllers/issues/1080>`_)
+* [JTC] Angle wraparound for first segment of trajectory (`#796 <https://github.com/ros-controls/ros2_controllers/issues/796>`_) (`#1033 <https://github.com/ros-controls/ros2_controllers/issues/1033>`_)
+* Bump version of pre-commit hooks (`#1073 <https://github.com/ros-controls/ros2_controllers/issues/1073>`_) (`#1074 <https://github.com/ros-controls/ros2_controllers/issues/1074>`_)
+* Let sphinx add parameter description with nested structures to documentation (backport `#652 <https://github.com/ros-controls/ros2_controllers/issues/652>`_) (`#1005 <https://github.com/ros-controls/ros2_controllers/issues/1005>`_)
+* Contributors: mergify[bot]
+
+2.33.0 (2024-02-12)
+-------------------
+* Fix usage of M_PI on Windows (`#1036 <https://github.com/ros-controls/ros2_controllers/issues/1036>`_) (`#1037 <https://github.com/ros-controls/ros2_controllers/issues/1037>`_)
+* Add test_depend on `hardware_interface_testing` (backport `#1018 <https://github.com/ros-controls/ros2_controllers/issues/1018>`_) (`#1019 <https://github.com/ros-controls/ros2_controllers/issues/1019>`_)
+* Add tests for `interface_configuration_type` consistently (`#899 <https://github.com/ros-controls/ros2_controllers/issues/899>`_) (`#1011 <https://github.com/ros-controls/ros2_controllers/issues/1011>`_)
+* [JTC] Fill action error_strings (`#887 <https://github.com/ros-controls/ros2_controllers/issues/887>`_) (`#1009 <https://github.com/ros-controls/ros2_controllers/issues/1009>`_)
+* [JTC] Invalidate empty trajectory messages (`#902 <https://github.com/ros-controls/ros2_controllers/issues/902>`_) (`#1000 <https://github.com/ros-controls/ros2_controllers/issues/1000>`_)
+* Revert "[JTC] Remove read_only from 'joints', 'state_interfaces' and 'command_interfaces' parameters (`#967 <https://github.com/ros-controls/ros2_controllers/issues/967>`_)" (`#978 <https://github.com/ros-controls/ros2_controllers/issues/978>`_) (`#986 <https://github.com/ros-controls/ros2_controllers/issues/986>`_)
+* Contributors: mergify[bot]
+
+2.32.0 (2024-01-20)
+-------------------
+* Cleanup package.xml und clarify tests of JTC. (backport `#889 <https://github.com/ros-controls/ros2_controllers/issues/889>`_) (`#924 <https://github.com/ros-controls/ros2_controllers/issues/924>`_)
+* [JTC] Remove deprecation from parameters validation file. (`#476 <https://github.com/ros-controls/ros2_controllers/issues/476>`_) (`#926 <https://github.com/ros-controls/ros2_controllers/issues/926>`_)
+* [JTC] Cancel goal in on_deactivate (`#962 <https://github.com/ros-controls/ros2_controllers/issues/962>`_) (`#970 <https://github.com/ros-controls/ros2_controllers/issues/970>`_)
+* Contributors: mergify[bot]
+
+2.31.0 (2024-01-11)
+-------------------
+* [JTC] Remove read_only from 'joints', 'state_interfaces' and 'command_interfaces' parameters (`#967 <https://github.com/ros-controls/ros2_controllers/issues/967>`_) (`#968 <https://github.com/ros-controls/ros2_controllers/issues/968>`_)
+* [JTC] Add console output for tolerance checks (backport `#932 <https://github.com/ros-controls/ros2_controllers/issues/932>`_) (`#938 <https://github.com/ros-controls/ros2_controllers/issues/938>`_)
+* [JTC] Cleanup includes (`#943 <https://github.com/ros-controls/ros2_controllers/issues/943>`_) (`#959 <https://github.com/ros-controls/ros2_controllers/issues/959>`_)
+* Fix whitespace
+* Add rqt_JTC to docs (`#950 <https://github.com/ros-controls/ros2_controllers/issues/950>`_) (`#952 <https://github.com/ros-controls/ros2_controllers/issues/952>`_)
+* Contributors: Bence Magyar, mergify[bot]
+
+2.30.0 (2023-12-20)
+-------------------
+* Fix floating point comparison in JTC (backport `#879 <https://github.com/ros-controls/ros2_controllers/issues/879>`_)
+* [JTC] Continue with last trajectory-point on success (backport `#842 <https://github.com/ros-controls/ros2_controllers/issues/842>`_)
+* [JTC] Remove start_with_holding option (backport `#839 <https://github.com/ros-controls/ros2_controllers/issues/839>`_)
+* [JTC] Activate checks for parameter validation backport (`#857 <https://github.com/ros-controls/ros2_controllers/issues/857>`_)
+* [JTC] Improve update methods for tests (backport `#858 <https://github.com/ros-controls/ros2_controllers/issues/858>`_)
+* [JTC] Fix dynamic reconfigure of tolerances (backport `#849 <https://github.com/ros-controls/ros2_controllers/issues/849>`_)
+* [JTC] Remove unused home pose (backport `#845 <https://github.com/ros-controls/ros2_controllers/issues/845>`_)
+* [JTC] Activate update of dynamic parameters (backport `#761 <https://github.com/ros-controls/ros2_controllers/issues/761>`_)
+* [JTC] Fix tests when state offset is used (backport `#797 <https://github.com/ros-controls/ros2_controllers/issues/797>`_)
+* Rename wraparound class variables (backport `#834 <https://github.com/ros-controls/ros2_controllers/issues/834>`_)
+* Update requirements of state interfaces (backport `#798 <https://github.com/ros-controls/ros2_controllers/issues/798>`_)
+* [JTC] Fix typos, implicit cast, const member functions (backport `#748 <https://github.com/ros-controls/ros2_controllers/issues/748>`_)
+* Cleanup comments and unnecessary checks (backport `#803 <https://github.com/ros-controls/ros2_controllers/issues/803>`_)
+* [JTC] Add tests for acceleration command interface (backport `#752 <https://github.com/ros-controls/ros2_controllers/issues/752>`_)
+* [Docs] Improve interface description of JTC (backport `#770 <https://github.com/ros-controls/ros2_controllers/issues/770>`_)
+* [JTC] Add time-out for trajectory interfaces (backport `#609 <https://github.com/ros-controls/ros2_controllers/issues/609>`_)
+* [JTC] Fix hold position mode with goal_time>0 (backport `#758 <https://github.com/ros-controls/ros2_controllers/issues/758>`_)
+* [JTC] Add note on goal_time=0 in docs (backport `#773 <https://github.com/ros-controls/ros2_controllers/issues/773>`_)
+* [JTC] Make most parameters read-only (backport `#771 <https://github.com/ros-controls/ros2_controllers/issues/771>`_)
+* [JTC] Tolerance tests + Hold on time violation (backport `#613 <https://github.com/ros-controls/ros2_controllers/issues/613>`_)
+* [JTC] Explicitly set hold position (backport `#558 <https://github.com/ros-controls/ros2_controllers/issues/558>`_)
+* [Doc] Fix links (backport `#715 <https://github.com/ros-controls/ros2_controllers/issues/715>`_)
+* Contributors: Christoph Fröhlich, Dr Denis Stogl, Bence Magyar, Abishalini Sivaraman
+
+2.29.0 (2023-12-05)
+-------------------
+
+2.28.0 (2023-11-30)
+-------------------
+
+2.27.0 (2023-11-14)
+-------------------
+
+2.26.0 (2023-10-03)
+-------------------
+
+2.25.0 (2023-09-15)
+-------------------
+* [JTC] Rename parameter: normalize_error to angle_wraparound (`#772 <https://github.com/ros-controls/ros2_controllers/issues/772>`_) (`#776 <https://github.com/ros-controls/ros2_controllers/issues/776>`_)
+* Remove wrong description (`#742 <https://github.com/ros-controls/ros2_controllers/issues/742>`_) (`#747 <https://github.com/ros-controls/ros2_controllers/issues/747>`_)
+* [JTC] Update trajectory documentation (`#714 <https://github.com/ros-controls/ros2_controllers/issues/714>`_) (`#741 <https://github.com/ros-controls/ros2_controllers/issues/741>`_)
+* Contributors: Christoph Fröhlich
+
 2.24.0 (2023-08-07)
 -------------------
 * [JTC] Disable use of closed-loop PID adapter if controller is used in open-loop mode. (`#551 <https://github.com/ros-controls/ros2_controllers/issues/551>`_) (`#740 <https://github.com/ros-controls/ros2_controllers/issues/740>`_)

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 project(bicycle_steering_controller LANGUAGES CXX)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "(GNU|Clang)")
-  add_compile_options(-Wall -Wextra -Wpedantic)
+  add_compile_options(-Wall -Wextra -Wpedantic -Wconversion)
 endif()
 
 # find dependencies
@@ -76,12 +76,12 @@ if(BUILD_TESTING)
   )
 
   add_rostest_with_parameters_gmock(
-    test_bicycle_steering_controller_preceeding test/test_bicycle_steering_controller_preceeding.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/test/bicycle_steering_controller_preceeding_params.yaml)
-  target_include_directories(test_bicycle_steering_controller_preceeding PRIVATE include)
-  target_link_libraries(test_bicycle_steering_controller_preceeding bicycle_steering_controller)
+    test_bicycle_steering_controller_preceding test/test_bicycle_steering_controller_preceding.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/test/bicycle_steering_controller_preceding_params.yaml)
+  target_include_directories(test_bicycle_steering_controller_preceding PRIVATE include)
+  target_link_libraries(test_bicycle_steering_controller_preceding bicycle_steering_controller)
   ament_target_dependencies(
-    test_bicycle_steering_controller_preceeding
+    test_bicycle_steering_controller_preceding
     controller_interface
     hardware_interface
   )

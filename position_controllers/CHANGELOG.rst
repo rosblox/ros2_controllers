@@ -2,6 +2,95 @@
 Changelog for package position_controllers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.45.0 (2025-04-27)
+-------------------
+
+2.44.0 (2025-04-10)
+-------------------
+
+2.43.0 (2025-03-17)
+-------------------
+* [ForwardCommandController] Fix the duplicate command interface types when reconfiguring the controller (backport `#1568 <https://github.com/ros-controls/ros2_controllers/issues/1568>`_, `#1570 <https://github.com/ros-controls/ros2_controllers/issues/1570>`_) (`#1569 <https://github.com/ros-controls/ros2_controllers/issues/1569>`_)
+* Contributors: mergify[bot]
+
+2.42.1 (2025-02-24)
+-------------------
+
+2.42.0 (2025-02-17)
+-------------------
+
+2.41.0 (2025-01-13)
+-------------------
+
+2.40.0 (2025-01-01)
+-------------------
+* Update position controller package.xml (backport `#1431 <https://github.com/ros-controls/ros2_controllers/issues/1431>`_) (`#1432 <https://github.com/ros-controls/ros2_controllers/issues/1432>`_)
+* Contributors: mergify[bot]
+
+2.39.0 (2024-12-03)
+-------------------
+* Update maintainers and add url tags (`#1363 <https://github.com/ros-controls/ros2_controllers/issues/1363>`_) (`#1364 <https://github.com/ros-controls/ros2_controllers/issues/1364>`_)
+* Contributors: mergify[bot]
+
+2.38.0 (2024-11-09)
+-------------------
+* Added -Wconversion flag and fix warnings (`#667 <https://github.com/ros-controls/ros2_controllers/issues/667>`_) (`#1321 <https://github.com/ros-controls/ros2_controllers/issues/1321>`_)
+* Contributors: mergify[bot]
+
+2.37.3 (2024-09-11)
+-------------------
+
+2.37.2 (2024-08-22)
+-------------------
+
+2.37.1 (2024-08-14)
+-------------------
+
+2.37.0 (2024-07-24)
+-------------------
+* Fix WaitSet issue in tests  (backport `#1206 <https://github.com/ros-controls/ros2_controllers/issues/1206>`_) (`#1211 <https://github.com/ros-controls/ros2_controllers/issues/1211>`_)
+* Contributors: mergify[bot]
+
+2.36.0 (2024-07-09)
+-------------------
+
+2.35.0 (2024-05-22)
+-------------------
+
+2.34.0 (2024-04-01)
+-------------------
+
+2.33.0 (2024-02-12)
+-------------------
+* Add test_depend on `hardware_interface_testing` (backport `#1018 <https://github.com/ros-controls/ros2_controllers/issues/1018>`_) (`#1019 <https://github.com/ros-controls/ros2_controllers/issues/1019>`_)
+* Contributors: mergify[bot]
+
+2.32.0 (2024-01-20)
+-------------------
+
+2.31.0 (2024-01-11)
+-------------------
+
+2.30.0 (2023-12-20)
+-------------------
+
+2.29.0 (2023-12-05)
+-------------------
+
+2.28.0 (2023-11-30)
+-------------------
+
+2.27.0 (2023-11-14)
+-------------------
+
+2.26.0 (2023-10-03)
+-------------------
+* [Doc] Add specific documentation on the available fw cmd controllers (`#765 <https://github.com/ros-controls/ros2_controllers/issues/765>`_) (`#778 <https://github.com/ros-controls/ros2_controllers/issues/778>`_)
+* Contributors: mergify[bot]
+
+2.25.0 (2023-09-15)
+-------------------
+
 2.24.0 (2023-08-07)
 -------------------
 
